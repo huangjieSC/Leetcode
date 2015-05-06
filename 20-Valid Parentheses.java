@@ -1,35 +1,27 @@
 public class Solution {
     public boolean isValid(String s) {
-        if(s.length()==0) return true;
+        if(s==null || s.length()==0) return true;
+        int len=s.length(), i=0;
         
         Stack<Character> stack = new Stack<Character>();
-        int index =0;
-        
-        
-        while(index<s.length()){
-            if(s.charAt(index)=='(' || s.charAt(index)=='{' || s.charAt(index)=='['){
+        int index = 0;
+      
+        while(index<len){
+             if(s.charAt(index)=='('||s.charAt(index)=='['||s.charAt(index)=='{'){
                 stack.push(s.charAt(index));
                 index++;
-            }
-                
-            else{
-                if(stack.isEmpty())
-                    return false;
-                char c = stack.pop();
-                if(c == '(' && s.charAt(index)==')')
-                    index++;
-                else if(c == '{' && s.charAt(index)=='}')
-                    index++;
-                else if(c == '[' && s.charAt(index)==']')
-                    index++;
-                else 
-                    return false;
-                
-            }
+                continue;
+             }
+            
+            if(stack.isEmpty()) return false;
+            char current=stack.pop();
+            
+            if(current=='(' && s.charAt(index)!=')') return false;
+            if(current=='[' && s.charAt(index)!=']') return false;
+            if(current=='{' && s.charAt(index)!='}') return false;
+            
+            index++;
         }
-        
-        if(!stack.isEmpty()) return false;
-        
-        return true;
+        return stack.isEmpty()?true:false;
     }
 }
