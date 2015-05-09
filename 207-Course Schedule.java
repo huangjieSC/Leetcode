@@ -6,6 +6,8 @@ public class Solution {
             matGraph[prerequisites[i][1]][prerequisites[i][0]] = 1;
         }
         int[] visited = new int[numCourses]; // -1: visited; 1: unvisited
+         for(int j=0; j<visited.length;j++)
+            visited[j]=0;
         
         //detect cycle in each connected component
         for (int node = 0; node < numCourses; node++) {
