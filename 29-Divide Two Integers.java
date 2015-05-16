@@ -14,15 +14,20 @@ public class Solution {
             sign = true;
         
         long result = 0;
+        long sum = 0;
+        long count = 0;
         
         while (dividendLong >= divisorLong) {
-            long base = divisorLong;
-            for (int i = 0; dividendLong >= base; i++) {
-                dividendLong -= base;
-                base <<= 1;
-                result += 1 << i;
+            sum = divisorLong;
+            count = 1;
+            while(sum+sum<=dividendLong){
+                 sum += sum;
+                count += count;
             }
+            dividendLong -= sum;
+            result += count;
         }
+        
         result = (sign) ? -result : result;
         if (result < Integer.MIN_VALUE || result > Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
