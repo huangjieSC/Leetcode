@@ -37,4 +37,31 @@ public class Solution {
         }
         return maxLen;
     }
+    // DP solution
+    public static int longestValidParentheses(String s) {
+        if (s==null||s.length()==0){
+            return 0;
+            }
+            
+        int n = s.length();
+        int[] dp = new int[n];
+        java.util.Arrays.fill(dp,0);
+        
+        int max = 0;
+        for(int i=n-2; i>=0; i--){
+            if(s.charAt(i)=='('){
+                int j = i+1+dp[i+1];
+                if(j<n && s.charAt(j)==')'){
+                    dp[i]=dp[i+1]+2;
+                    int k=0;
+                    if(j+1<n){
+                        k=dp[j+1];
+                    }
+                    dp[i] +=k;
+                }
+                max=Math.max(max,dp[i]);
+            }
+        }
+        return max;
+     }
   }
